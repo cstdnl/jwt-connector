@@ -44,13 +44,6 @@ import static org.mule.runtime.extension.api.annotation.param.MediaType.ANY;
  */
 
 public class JwtOperations {
-    // Remove the class-level parameter
-    // @Parameter
-    // @DisplayName("Custom Claims")
-    // @Summary("Map of custom claims to add to the token")
-    // @Optional
-    // @Expression(SUPPORTED)
-    // private Map<String, Object> customClaims;
 
     @MediaType(value = ANY, strict = false)
     @DisplayName("Generate JWT Token")
@@ -130,8 +123,6 @@ public class JwtOperations {
             // -------------------
             // Keystore Operations
             // -------------------
-
-            // KeystoreService keystoreService = new KeystoreService(configuration.getKeystoreSettings());
 
             KeystoreService keystoreService;
             if (keystoreStreamParametersGroup.getKeystoreStreamParameters() != null) {

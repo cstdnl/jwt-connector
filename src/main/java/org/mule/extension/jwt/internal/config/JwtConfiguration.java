@@ -17,7 +17,6 @@ import org.mule.runtime.extension.api.annotation.param.display.DisplayName;
 @Operations(JwtOperations.class)
 public class JwtConfiguration {
 
-	//@ParameterGroup(name = "Key Store Settings")
     @Parameter
     @Optional
     @DisplayName("Key Store Settings")
