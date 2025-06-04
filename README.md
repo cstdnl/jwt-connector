@@ -1,4 +1,6 @@
-![icon](https://github.com/user-attachments/assets/5e55fd3f-8a3a-4ef6-9bdb-98cb0daec190)# JWT Extension
+# JWT Extension
+
+![icon](https://github.com/user-attachments/assets/5e55fd3f-8a3a-4ef6-9bdb-98cb0daec190)
 
 ![Upload<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 398 398" width="398" height="398">
 	<title>icon copy 2</title>
