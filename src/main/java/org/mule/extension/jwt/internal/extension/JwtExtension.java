@@ -16,7 +16,7 @@ import org.mule.sdk.api.meta.JavaVersion;
 
 @Xml(prefix = "jwt")
 @Extension(name = "JWT Connector")
-@JavaVersionSupport({JavaVersion.JAVA_17, JavaVersion.JAVA_11, JavaVersion.JAVA_8})
+@JavaVersionSupport({JavaVersion.JAVA_17})
 @Configurations(JwtConfiguration.class)
 public class JwtExtension {
 

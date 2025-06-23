@@ -42,7 +42,7 @@ public class KeystoreStreamParameters {
 
     @Parameter
     @Optional
-    @DisplayName("Password")
+    @DisplayName("Key Password")
     @Expression(SUPPORTED)
     @Password
     public String keyPassword;

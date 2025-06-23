@@ -26,13 +26,13 @@ public class KeystoreSettings {
     @Parameter
     @Optional
     @Password
-    @DisplayName("Key Password")
+    @DisplayName("Password")
     private String keystorePassword;
 
     @Parameter
     @Optional
     @Password
-    @DisplayName("Password")
+    @DisplayName("Key Password")
     private String password;
 
     @Parameter
