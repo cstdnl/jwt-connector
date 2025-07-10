@@ -45,7 +45,7 @@ public class KeystoreService {
     }
 
     public boolean isSigningRequired() {
-        return keystoreSettings != null || streamKeystoreType != null;
+        return (keystoreSettings != null && keystoreSettings.getKeystoreAlias() != null) || streamKeystoreType != null;
     }
 
     private KeystoreTypes getEffectiveKeystoreType() {
@@ -87,20 +87,38 @@ public class KeystoreService {
 
     public SigningCredentials getSigningCredentials() throws Exception {
         KeyStore keyStore = loadKeystore();
-        String alias = streamAlias != null ? streamAlias : keystoreSettings.getKeystoreAlias();
+        String alias = getEffectiveAlias(keyStore);
         String keyPassword = streamKeyPassword != null ? streamKeyPassword : keystoreSettings.getPassword();
         
         X509Certificate cert = (X509Certificate) keyStore.getCertificate(alias);
         PrivateKey privateKey = (PrivateKey) keyStore.getKey(alias, keyPassword.toCharArray());
-
+    
         if (cert == null || privateKey == null) {
             throw new Exception("Certificate or private key not found for alias: " + alias);
         }
-
+    
         SignatureAlgorithm algorithm = determineAlgorithm(privateKey);
         String certB64 = Base64.getEncoder().encodeToString(cert.getEncoded());
-
+    
         return new SigningCredentials(privateKey, cert, algorithm, certB64);
+    }
+
+    private String getEffectiveAlias(KeyStore keyStore) throws Exception {
+        // First try to get the configured alias
+        String configuredAlias = streamAlias != null ? streamAlias : 
+            (keystoreSettings != null ? keystoreSettings.getKeystoreAlias() : null);
+        
+        if (configuredAlias != null) {
+            return configuredAlias;
+        }
+        
+        // If no alias is configured, get the first alias from the keystore
+        java.util.Enumeration<String> aliases = keyStore.aliases();
+        if (!aliases.hasMoreElements()) {
+            throw new Exception("No aliases found in keystore");
+        }
+        
+        return aliases.nextElement();
     }
 
     private SignatureAlgorithm determineAlgorithm(PrivateKey privateKey) {
